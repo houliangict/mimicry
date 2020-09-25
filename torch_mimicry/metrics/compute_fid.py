@@ -236,7 +236,7 @@ def fid_score(num_real_samples,
     np.random.seed(seed)
 
     # Setup directories
-    inception_path = os.path.join('inception_model')
+    inception_path = os.path.join('./inception_model')
 
     # Setup the inception graph
     inception_utils.create_inception_graph(inception_path)

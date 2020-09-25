@@ -236,7 +236,7 @@ def kid_score(num_samples,
     np.random.seed(seed)
 
     # Directories
-    inception_path = os.path.join('inception_model')
+    inception_path = os.path.join('./inception_model')
 
     # Setup the inception graph
     inception_utils.create_inception_graph(inception_path)
