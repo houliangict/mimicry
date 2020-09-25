@@ -1,6 +1,9 @@
 """
 Tutorial of using SSGAN.
 """
+import sys
+sys.path.append('../')
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -304,4 +307,5 @@ mmc.metrics.evaluate(metric='fid',
                      num_real_samples=10000,
                      num_fake_samples=10000,
                      evaluate_step=100000,
-                     device=device)
+                     device=device,
+                     split='test')

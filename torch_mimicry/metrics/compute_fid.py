@@ -21,7 +21,8 @@ def compute_real_dist_stats(num_samples,
                             stats_file=None,
                             seed=0,
                             verbose=True,
-                            log_dir='./log'):
+                            log_dir='./log',
+                            **kwargs):
     """
     Reads the image data and compute the FID mean and cov statistics
     for real images.
@@ -59,7 +60,7 @@ def compute_real_dist_stats(num_samples,
     else:
         # Obtain the numpy format data
         print("INFO: Obtaining images...")
-        images = get_dataset_images(dataset, num_samples=num_samples)
+        images = get_dataset_images(dataset, num_samples=num_samples, **kwargs)
 
         # Compute the mean and cov
         print("INFO: Computing statistics for real images...")
@@ -173,7 +174,8 @@ def fid_score(num_real_samples,
               batch_size=50,
               verbose=True,
               stats_file=None,
-              log_dir='./log'):
+              log_dir='./log',
+              **kwargs):
     """
     Computes FID stats using functions that store images in memory for speed and fidelity.
     Fidelity since by storing images in memory, we don't subject the scores to different read/write
@@ -234,7 +236,7 @@ def fid_score(num_real_samples,
     np.random.seed(seed)
 
     # Setup directories
-    inception_path = os.path.join(log_dir, 'metrics', 'inception_model')
+    inception_path = os.path.join('inception_model')
 
     # Setup the inception graph
     inception_utils.create_inception_graph(inception_path)
@@ -264,7 +266,8 @@ def fid_score(num_real_samples,
                                                  verbose=verbose,
                                                  stats_file=stats_file,
                                                  log_dir=log_dir,
-                                                 seed=seed)
+                                                 seed=seed,
+                                                 **kwargs)
 
         m_fake, s_fake = compute_gen_dist_stats(netG=netG,
                                                 num_samples=num_fake_samples,

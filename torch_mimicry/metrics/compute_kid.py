@@ -21,7 +21,8 @@ def compute_real_dist_feat(num_samples,
                            seed=0,
                            verbose=True,
                            feat_file=None,
-                           log_dir='./log'):
+                           log_dir='./log',
+                           **kwargs):
     """
     Reads the image data and compute the real image features.
 
@@ -57,7 +58,7 @@ def compute_real_dist_feat(num_samples,
     else:
         # Obtain the numpy format data
         print("INFO: Obtaining images...")
-        images = get_dataset_images(dataset, num_samples=num_samples)
+        images = get_dataset_images(dataset, num_samples=num_samples, **kwargs)
 
         # Compute the mean and cov
         print("INFO: Computing features for real images...")
@@ -175,7 +176,8 @@ def kid_score(num_samples,
               batch_size=50,
               verbose=True,
               feat_file=None,
-              log_dir='./log'):
+              log_dir='./log',
+              **kwargs):
     """
     Computes KID score.
 
@@ -234,7 +236,7 @@ def kid_score(num_samples,
     np.random.seed(seed)
 
     # Directories
-    inception_path = os.path.join(log_dir, 'metrics', 'inception_model')
+    inception_path = os.path.join('inception_model')
 
     # Setup the inception graph
     inception_utils.create_inception_graph(inception_path)
@@ -264,7 +266,8 @@ def kid_score(num_samples,
                                            verbose=verbose,
                                            feat_file=feat_file,
                                            log_dir=log_dir,
-                                           seed=seed)
+                                           seed=seed,
+                                           **kwargs)
 
         fake_feat = compute_gen_dist_feat(netG=netG,
                                           num_samples=num_samples,

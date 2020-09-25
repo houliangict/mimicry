@@ -142,7 +142,7 @@ def load_celeba_dataset(root,
                         transform_data=True,
                         convert_tensor=True,
                         download=True,
-                        split='all',
+                        split='train',
                         size=64,
                         **kwargs):
     """

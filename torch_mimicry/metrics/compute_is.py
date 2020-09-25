@@ -73,7 +73,7 @@ def inception_score(num_samples,
     np.random.seed(seed)
 
     # Build inception
-    inception_path = os.path.join(log_dir, 'metrics/inception_model')
+    inception_path = os.path.join('inception_model')
     inception_utils.create_inception_graph(inception_path)
 
     # Inference variables
