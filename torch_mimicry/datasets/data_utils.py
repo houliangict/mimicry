@@ -24,8 +24,14 @@ def load_dataset(root, name, **kwargs):
     if name == "cifar10":
         return load_cifar10_dataset(root, **kwargs)
 
+    if name == "cifar10_test":
+        return load_cifar10_dataset(root, split='test', **kwargs)
+
     elif name == "cifar100":
         return load_cifar100_dataset(root, **kwargs)
+
+    elif name == "cifar100_test":
+        return load_cifar100_dataset(root, split='test', **kwargs)
 
     elif name == "imagenet_32":
         return load_imagenet_dataset(root, size=32, **kwargs)
@@ -36,11 +42,26 @@ def load_dataset(root, name, **kwargs):
     elif name == "stl10_48":
         return load_stl10_dataset(root, size=48, **kwargs)
 
+    elif name == "stl10_48_test":
+        return load_stl10_dataset(root, size=48, split='test', **kwargs)
+
     elif name == "celeba_64":
         return load_celeba_dataset(root, size=64, **kwargs)
 
+    elif name == "celeba_64_valid":
+        return load_celeba_dataset(root, size=64, split='valid', **kwargs)
+
+    elif name == "celeba_64_test":
+        return load_celeba_dataset(root, size=64, split='test', **kwargs)
+
     elif name == "celeba_128":
         return load_celeba_dataset(root, size=128, **kwargs)
+
+    elif name == "celeba_128_valid":
+        return load_celeba_dataset(root, size=128, split='valid', **kwargs)
+
+    elif name == "celeba_128_test":
+        return load_celeba_dataset(root, size=128, split='test', **kwargs)
 
     elif name == "lsun_bedroom_128":
         return load_lsun_bedroom_dataset(root, size=128, **kwargs)
@@ -142,7 +163,7 @@ def load_celeba_dataset(root,
                         transform_data=True,
                         convert_tensor=True,
                         download=True,
-                        split='all',
+                        split='train',
                         size=64,
                         **kwargs):
     """

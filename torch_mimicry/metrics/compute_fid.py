@@ -203,12 +203,19 @@ def fid_score(num_real_samples,
     if isinstance(dataset, str):
         default_datasets = {
             'cifar10',
+            'cifar10_test',
             'cifar100',
+            'cifar100_test',
             'stl10_48',
+            'stl10_48_test'
             'imagenet_32',
             'imagenet_128',
             'celeba_64',
+            'celeba_64_valid',
+            'celeba_64_test',
             'celeba_128',
+            'celeba_128_valid',
+            'celeba_128_test',
             'lsun_bedroom',
             'fake_data',
         }
@@ -234,7 +241,8 @@ def fid_score(num_real_samples,
     np.random.seed(seed)
 
     # Setup directories
-    inception_path = os.path.join(log_dir, 'metrics', 'inception_model')
+    # inception_path = os.path.join(log_dir, 'metrics', 'inception_model')
+    inception_path = os.path.join('./inception_model')
 
     # Setup the inception graph
     inception_utils.create_inception_graph(inception_path)

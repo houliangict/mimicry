@@ -290,17 +290,38 @@ def get_dataset_images(dataset, num_samples=50000, **kwargs):
         elif dataset == "celeba_64":
             images = get_celeba_images(num_samples, size=64, **kwargs)
 
+        elif dataset == "celeba_64_valid":
+            images = get_celeba_images(num_samples, size=64, split='valid', **kwargs)
+
+        elif dataset == "celeba_64_test":
+            images = get_celeba_images(num_samples, size=64, split='test', **kwargs)
+
         elif dataset == "celeba_128":
             images = get_celeba_images(num_samples, size=128, **kwargs)
+
+        elif dataset == "celeba_128_valid":
+            images = get_celeba_images(num_samples, size=128, split='valid', **kwargs)
+
+        elif dataset == "celeba_128_test":
+            images = get_celeba_images(num_samples, size=128, split='test', **kwargs)
 
         elif dataset == "stl10_48":
             images = get_stl10_images(num_samples, **kwargs)
 
+        elif dataset == "stl10_48_test":
+            images = get_stl10_images(num_samples, split='test', **kwargs)
+
         elif dataset == "cifar10":
             images = get_cifar10_images(num_samples, **kwargs)
 
+        elif dataset == "cifar10_test":
+            images = get_cifar10_images(num_samples, split='test', **kwargs)
+
         elif dataset == "cifar100":
             images = get_cifar100_images(num_samples, **kwargs)
+
+        elif dataset == "cifar100_test":
+            images = get_cifar100_images(num_samples, split='test', **kwargs)
 
         elif dataset == "lsun_bedroom_128":
             images = get_lsun_bedroom_images(num_samples, size=128, **kwargs)
