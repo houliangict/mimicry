@@ -2,7 +2,7 @@
 Tutorial of using SSGAN.
 """
 import sys
-sys.path.append('../')
+sys.path.append('..')
 
 import torch
 import torch.nn as nn
@@ -267,12 +267,21 @@ class SSGANDiscriminator(gan.BaseDiscriminator):
 #        Training
 #########################
 # Directories
-dataset_dir = './datasets'
-log_dir = './log/ssgan'
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--dataset', type=str, default='cifar10')
+parser.add_argument('--log_dir', type=str, default='./logs/gan')
+parser.add_argument('--lr', type=float, default=2e-4)
+parser.add_argument('--beta1', type=float, default=0.0)
+parser.add_argument('--beta2', type=float, default=0.9)
+parser.add_argument('--n_steps', type=int, default=100000)
+parser.add_argument('--n_dis', type=int, default=2)
+args = parser.parse_args()
 
 # Data handling objects
 device = torch.device('cuda:0' if torch.cuda.is_available() else "cpu")
-dataset = mmc.datasets.load_dataset(root='./datasets', name='cifar10')
+dataset = mmc.datasets.load_dataset(root='./datasets', name=args.dataset)
 dataloader = torch.utils.data.DataLoader(dataset,
                                          batch_size=64,
                                          shuffle=True,
@@ -281,18 +290,18 @@ dataloader = torch.utils.data.DataLoader(dataset,
 # Define models and optimizers
 netG = SSGANGenerator().to(device)
 netD = SSGANDiscriminator().to(device)
-optD = optim.Adam(netD.parameters(), 2e-4, betas=(0.0, 0.9))
-optG = optim.Adam(netG.parameters(), 2e-4, betas=(0.0, 0.9))
+optD = optim.Adam(netD.parameters(), args.lr, betas=(args.beta1, args.beta2))
+optG = optim.Adam(netG.parameters(), args.lr, betas=(args.beta1, args.beta2))
 
 # Start training
 trainer = mmc.training.Trainer(netD=netD,
                                netG=netG,
                                optD=optD,
                                optG=optG,
-                               n_dis=2,
-                               num_steps=100000,
+                               n_dis=args.n_dis,
+                               num_steps=args.n_steps,
                                dataloader=dataloader,
-                               log_dir=log_dir,
+                               log_dir=args.log_dir,
                                device=device)
 trainer.train()
 
@@ -301,11 +310,11 @@ trainer.train()
 ##########################
 # Evaluate fid
 mmc.metrics.evaluate(metric='fid',
-                     log_dir=log_dir,
+                     log_dir=args.log_dir,
                      netG=netG,
-                     dataset='cifar10',
+                     dataset=args.dataset,
                      num_real_samples=10000,
                      num_fake_samples=10000,
-                     evaluate_step=100000,
+                     evaluate_step=args.n_steps,
                      device=device,
                      split='test')

@@ -51,10 +51,10 @@ class Trainer:
                  netG_ckpt_file=None,
                  netD_ckpt_file=None,
                  print_steps=1,
-                 vis_steps=500,
-                 log_steps=50,
-                 save_steps=5000,
-                 flush_secs=30):
+                 vis_steps=1000,
+                 log_steps=100,
+                 save_steps=10000,
+                 flush_secs=60):
         # Input values checks
         ints_to_check = {
             'num_steps': num_steps,
@@ -124,7 +124,6 @@ class Trainer:
         # Log hyperparameters for experiments
         self.params = {
             'log_dir': self.log_dir,
-            'num_steps': self.num_steps,
             'batch_size': self.dataloader.batch_size,
             'n_dis': self.n_dis,
             'lr_decay': self.lr_decay,
