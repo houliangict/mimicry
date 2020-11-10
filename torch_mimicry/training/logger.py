@@ -5,7 +5,8 @@ import os
 
 import numpy as np
 import torch
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
+from tensorboardX import SummaryWriter
 from torchvision import utils as vutils
 
 
@@ -198,13 +199,13 @@ class Logger:
                                               normalize=True)
 
                 vutils.save_image(images_viz,
-                                  '{}/{}_samples_step_{}.png'.format(
+                                  '{}/{}_samples_step_{:06d}.png'.format(
                                       img_dir, name, global_step),
                                   normalize=True)
 
-                if 'img' not in self.writers:
-                    self.writers['img'] = self._build_writer('img')
+                # if 'img' not in self.writers:
+                #     self.writers['img'] = self._build_writer('img')
 
-                self.writers['img'].add_image('{}_vis'.format(name),
-                                              images_viz,
-                                              global_step=global_step)
+                # self.writers['img'].add_image('{}_vis'.format(name),
+                #                               images_viz,
+                #                               global_step=global_step)

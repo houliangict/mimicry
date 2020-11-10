@@ -269,7 +269,7 @@ class Trainer:
                     iter_dataloader, real_batch = self._fetch_data(
                         iter_dataloader=iter_dataloader)
 
-                    # ------------------------
+                    # -----------------------
                     #   Update D Network
                     # -----------------------
                     log_data = self.netD.train_step(real_batch=real_batch,
@@ -292,7 +292,7 @@ class Trainer:
                             log_data=log_data,
                             device=self.device)
 
-                # --------------------------------
+                # -------------------------------
                 #   Update Training Variables
                 # -------------------------------
                 global_step += 1
